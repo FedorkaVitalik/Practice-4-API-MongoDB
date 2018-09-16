@@ -11,8 +11,6 @@ const urlencodedParser = bodyParser.urlencoded({
 
 let collection;
 let db;
-//Функція, яка зчитує дані з файлу,
-//або якщо він пустий то записує нові дані, зчитуючи їх з іншого файлу
 
 //Обробник запиту глобальних даних
 app.get('/getGlobal', (req, res) => {
@@ -90,7 +88,6 @@ app.post('/setMark', urlencodedParser, (req, res) => {
                 } else {
                     console.log('Такого предмета немає');
                 }
-                // writeFileData(data);
                 collection.save(data, data.students);
                 res.send(JSON.stringify(studentData));
             } else {
@@ -122,8 +119,6 @@ app.post('/addStud', urlencodedParser, (req, res) => {
         } else {
             const data = result[0];
             data.students[req.body.facult][req.body.spec][req.body.course][req.body.newStud] = {};
-            // collection.save(data, data.students, () => sendNote(req.body, res));
-
             collection.save(data, data.students, () => res.send({
                 result: true
             }));
